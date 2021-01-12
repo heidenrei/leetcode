@@ -5,34 +5,31 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        def get_nums(curr):
-            num = ''
-            curr = curr
-            while curr.next:
-                num += str(curr.val)
-                curr = curr.next
-                
-            num += str(curr.val)
+        one = []
+        two = []
+        
+        while l1:
+            one.append(str(l1.val))
+            l1 = l1.next
             
-            print(num)
+        while l2:
+            two.append(str(l2.val))
+            l2 = l2.next
             
-            num = num[::-1]
-            
-            return int(num)
-                
-        outnum = get_nums(l1) + get_nums(l2)
+        one.reverse()
+        two.reverse()
         
-        outnum = [x for x in str(outnum)]
+        one = int(''.join(one))
+        two = int(''.join(two))
         
-        outnum = outnum[::-1]
+        total = str(one + two)
         
-        outnum = list(map(int, outnum))
+        total = total[::-1]
         
-        head = ListNode(outnum[0])
-        og_head = head
-        
-        for i in range(1, len(outnum)):
-            head.next = ListNode(outnum[i])
+        head = ListNode(total[0])
+        og = head
+        for i in range(1, len(total)):
+            head.next = ListNode(total[i])
             head = head.next
-        
-        return og_head
+            
+        return og
