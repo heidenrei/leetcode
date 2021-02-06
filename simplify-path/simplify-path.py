@@ -1,27 +1,13 @@
 class Solution:
-    def simplifyPath(self, path: str) -> str:
-        path = path.split('/')
-        def f(el):
-            if not el:
-                return False
-            elif el == '.':
-                return False
-            else:
-                return True
-            
-        path = list(filter(f, path))
-        
-        stack = []
-        
-        idx = 0
-        
-        while idx < len(path):
-            if path[idx] == '..':
-                if stack:
-                    stack.pop()
-            else:
-                stack.append(path[idx])
-                
-            idx += 1
-        
-        return '/' + '/'.join(stack)
+    def simplifyPath(self, path: str) -> str:
+        path = deque([x for x in path.split('/') if x])
+        ans = []
+        while path:
+            curr = path.popleft()
+            if curr == '..':
+                if ans:
+                    ans.pop()
+            elif curr != '.':
+                ans.append(curr)
+                
+        return '/' + '/'.join(ans)
