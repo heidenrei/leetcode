@@ -1,31 +1,18 @@
 class Solution:
-    def isRectangleCover(self, rectangles: List[List[int]]) -> bool:
-        xs = []
-​
-        ys = []
-        
-        for x1, y1, x2, y2 in rectangles:
-            xs.append(x1)
-            xs.append(x2)
-            ys.append(y1)
-            ys.append(y2)
-            
-        xlookup = {x: i for i, x in enumerate(sorted(set(xs)))}
-        ylookup = {y: i for i, y in enumerate(sorted(set(ys)))}
-        
-        M = len(ylookup) - 1
-        N = len(xlookup) - 1
-        
-        grid = [[0] * M for _ in range(N)]
-        
-        for x1, y1, x2, y2 in rectangles:
-            for x_cell in range(xlookup[x1], xlookup[x2]):
-                for y_cell in range(ylookup[y1], ylookup[y2]):
-                    grid[x_cell][y_cell] += 1
-                    
-        for row in grid:
-            for cell in row:
-                if cell != 1:
-                    return False
-                
-        return True
+    def isRectangleCover(self, A):
+        # xor out internal corners (cause they'll appear twice)
+        # sum up area of all the rectangles and make sure that it matches the area of the remaining corners
+        
+        total_area = 0
+        corners = set()
+        
+        for x1, y1, x2, y2 in A:
+            total_area += (x2-x1)*(y2-y1)
+            corners ^= {tuple([x1, y1])}
+            corners ^= {tuple([x2, y2])}
+            corners ^= {tuple([x1, y2])}
+            corners ^= {tuple([x2, y1])}
+            
+        corners = list(corners)
+        corners.sort()
+        return len(corners) == 4 and (corners[1][1] - corners[0][1]) * (corners[2][0] - corners[1][0]) == total_area
