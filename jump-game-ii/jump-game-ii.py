@@ -1,16 +1,26 @@
 class Solution:
-    def jump(self, nums: List[int]) -> int:
-        dp = [float(inf) for x in range(len(nums))]
-        dp[0] = 0
-        
-        if len(nums) == 1:
-            return 0
-        
-        if nums[0] == 25000:
-            return 2
-        
-        for i in range(len(nums)-1):
-            for j in range(1, nums[i]+1):
-                if i + j == len(nums)-1:
-                    return dp[i] + 1
-                dp[i+j] = min(dp[i+j], dp[i] + 1)
+    def jump(self, nums: List[int]) -> int:
+        N = len(nums)
+        seen = set()
+        if N == 1:
+            return 0
+        q = [0]
+        cnt = 0
+        
+        while q:
+            tmp = set()
+            while q:
+                i = q.pop()
+                if i == N - 1:
+                    return cnt
+                
+                if i + nums[i] >= N - 1:
+                    return cnt + 1
+                
+                for di in range(1, nums[i]+1):
+                    ni = i + di
+                    if ni not in seen:
+                        seen.add(ni)
+                        tmp.add(ni)
+            q.extend(list(tmp))
+            cnt += 1
