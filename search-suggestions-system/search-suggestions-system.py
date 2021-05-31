@@ -2,51 +2,50 @@ class Node:
     def __init__(self):
         self.edges = {}
         self.words = []
-        
-    def add_word(self, word):
-        self.words.append(word)
-        self.words.sort()
-        
-        if len(self.words) > 3:
-            self.words.pop()
-        
+
 class Trie:
     def __init__(self):
         self.root = Node()
         
-    def add(self, word):
+    def add_word(self, word):
         curr = self.root
-                
+        
         for ch in word:
             if ch not in curr.edges:
                 curr.edges[ch] = Node()
-            
-            curr.add_word(word)
             curr = curr.edges[ch]
+            curr.words.append(word)
             
-        curr.add_word(word)
-        
-    def search(self, word):
-        ans = []
+            if len(curr.words) > 3:
+                curr.words.pop()
+                
+    def search(self, prefix):
         curr = self.root
         
-        for ch in word:
+        for ch in prefix:
             if ch not in curr.edges:
-                ans.append([])
-                break
-                
+                return ''
             curr = curr.edges[ch]
-            ans.append(curr.words)
             
-        while len(ans) < len(word):
-            ans.append([])
-        return ans
-
+        return curr.words
+            
+                
+            
+        
 class Solution:
     def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
-        t = Trie()
-        #products.sort(reverse=True)
-        for p in products:
-            t.add(p)
+        products.sort()
         
-        return t.search(searchWord)
+        t = Trie()
+        
+        for p in products:
+            t.add_word(p)
+            
+        ans = []
+        curr = ''
+            
+        for ch in searchWord:
+            curr += ch
+            ans.append(t.search(curr))
+            
+        return ans
