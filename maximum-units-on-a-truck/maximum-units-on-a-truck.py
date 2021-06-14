@@ -1,15 +1,16 @@
 class Solution:
-    def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
-        boxTypes.sort(key=lambda x: x[1], reverse=True)
-        
-        boxTypes = deque(boxTypes)
-        
-        ans = 0
-                
-        while truckSize and boxTypes:
-            x, y = boxTypes.popleft()
-            while x and truckSize:
-                x -= 1
-                ans += y
-                truckSize -= 1
-        return ans
+    def maximumUnits(self, boxes: List[List[int]], k: int) -> int:
+        boxes.sort(key=lambda x: (-x[1], x[0]))
+        i = 0
+        ans = 0
+        
+        while k > 0 and i < len(boxes):
+            if boxes[i][0] <= k:
+                ans += boxes[i][0] * boxes[i][1]
+                k -= boxes[i][0]
+                i += 1
+            else:
+                ans += k * boxes[i][1]
+                break
+                
+        return ans
