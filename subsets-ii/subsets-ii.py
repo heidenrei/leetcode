@@ -1,21 +1,22 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
-        N = len(nums)
-        ans = set()
+        nums.sort()
         seen = set()
-        
-        @lru_cache(None)
-        def go(curr, idx):
-            curr = tuple(sorted(curr))
-            if curr not in seen:
-                ans.add(curr)
-                seen.add(curr)
-            for i in range(idx, N):
-                curr = list(curr)
-                curr.append(nums[i])
-                go(tuple(curr), i+1)
-                curr.pop()
+        ans = [[]]
+        for x in nums:
+            if tuple([x]) not in seen:
+                tmp = [[x]]
+                seen.add(tuple([x]))
+            else:
+                tmp = []
+            for y in ans:
+                tmp_l = sorted([x] + y)
                 
-        go(tuple(), 0)
-
+                if tuple(tmp_l) not in seen:
+                    seen.add(tuple(tmp_l))
+                
+                    tmp.append([x] + y)
+                
+            ans.extend(tmp)
+            
         return ans
