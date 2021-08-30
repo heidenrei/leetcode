@@ -1,14 +1,11 @@
 class Solution:
-    def maxCount(self, R, C, ops):
-        if not ops:
-            return R * C
-        minx = math.inf
-        miny = math.inf
+    def maxCount(self, m: int, n: int, ops: List[List[int]]) -> int:
+        mx, my = m, n
         
         for x, y in ops:
-            minx = min(minx, x)
-            miny = min(miny, y)
+            mx = min(mx, x)
+            my = min(my, y)
             
-        return minx*miny
+        return mx*my
             
         
