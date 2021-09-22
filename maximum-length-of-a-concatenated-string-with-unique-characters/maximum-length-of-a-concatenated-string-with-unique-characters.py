@@ -1,38 +1,22 @@
 class Solution:
-    def maxLength(self, A):
-        A = [set([y for y in x]) for x in A if len(set(x)) == len(x)]
-        
-        best_possible = set()
-        for x in A:
-            best_possible |= x
-            
-        best_N = len(best_possible)    
-        found_ans = False
-        N = len(A)
-        #@cache
-        def go(curr):
-            nonlocal found_ans
-            if found_ans:
-                return best_N
-            
-            if len(curr) == best_N:
-                found_ans = True
-                return best_N
-            
-            best = 0
-            found_longer = False
+    def maxLength(self, arr: List[str]) -> int:
+        arr = [set([x for x in y]) for y in arr if len(set([x for x in y])) == len(y)]
+        ans = 0
+        N = len(arr)
+        @cache
+        def go(bm):
+            nonlocal ans
+            s = set()
             for i in range(N):
-                if not curr & A[i]:
-                    found_longer = True
-                    best = max(best, go(curr | A[i]))
-                    
-            if not found_longer:
-                return len(curr) if curr else 0
-            else:
-                return best
-                    
-        if found_ans:
-            return best_N
+                if bm & (1<<i):
+                    s |= arr[i]
             
-        ans = [go(A[i]) for i in range(N)]
-        return max(ans) if ans else 0
+            ans = max(ans, len(s))
+            
+            for i in range(N):
+                if not bm & (1<<i) and not s & arr[i]:
+                    go(bm | (1<<i))
+                    
+                    
+        go(0)
+        return ans
