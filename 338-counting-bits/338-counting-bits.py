@@ -1,3 +1,7 @@
 class Solution:
     def countBits(self, n: int) -> List[int]:
-        return [x.bit_count() for x in range(n+1)]
+        ans = [0 for x in range(n+1)]
+        for x in range(n+1):
+            ans[x] = x.bit_count()
+            
+        return ans
