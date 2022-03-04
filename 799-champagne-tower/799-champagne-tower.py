@@ -13,12 +13,5 @@ class Solution:
                     dp[i][j] = dp[i-1][j-1]/2
                 dp[i][j] += dp[i-1][j]/2
                 if i == row and j == col:
-                    # for x in dp:
-                    #     print(x)
                     return min(1, dp[i][j])
                 dp[i][j] = max(0, dp[i][j]-1)
-        
-#         for x in dp:
-#             print(x)
-                       
-#         return dp[row][col]
