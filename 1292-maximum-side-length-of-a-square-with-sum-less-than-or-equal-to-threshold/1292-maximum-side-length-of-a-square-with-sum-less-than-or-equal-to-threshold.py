@@ -20,9 +20,6 @@ class Solution:
                     
             return False
         
-        print(is_good(1))
-        print(is_good(2))
-        
         l = 0
         r = min(R, C-1)
         while l < r:
