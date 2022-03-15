@@ -2,10 +2,6 @@ class Solution:
     def minimumMoves(self, A) -> int:
         R, C = len(A), len(A[0])
         DIRS = [[1,0], [0,1]]#, [-1,0],[0,-1]]
-        for x in A:
-            print(x)
-            
-        print()
         level = 0
         q = [[0, 0, 0]]
         seen = set()
@@ -40,7 +36,6 @@ class Solution:
                         if 0 <= tni < R and 0 <= tnj < C and 0 <= hni < R and 0 <= hnj < C and A[tni][tnj] != 1 and A[hni][hnj] != 1 and (tni, tnj, o) not in seen:
                             seen.add((tni, tnj, o))
                             tmp.append([tni, tnj, o])
-            print(level, tmp)
             q = tmp
             level += 1
             
