@@ -9,7 +9,6 @@ class Solution:
             ans = set()
             for nei in d[node]:
                 if nei not in seen:
-                    print(nei)
                     seen.add(nei)
                     ans.add(nei)
                     ans |= go(nei)
