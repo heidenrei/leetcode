@@ -1,38 +1,26 @@
-from sortedcontainers import SortedList
+#from sortedcontainers import SortedList
 
 class Solution:
     def trapRainWater(self, A: List[List[int]]) -> int:
-
         R, C = len(A), len(A[0])
         DIRS = [[1,0], [0,1], [0,-1],[-1,0]]
-        
-        # walls = set()
-        # seen = set()
-        # for i in range(R):
-        #     walls.add((i, 0, A[i][0]))
-        #     seen.add((i, 0))
-        #     walls.add((i, C-1, A[i][-1]))
-        #     seen.add((i, C-1))
-        # for j in range(C):
-        #     walls.add((0, j, A[0][j]))
-        #     seen.add((0, j))
-        #     walls.add((R-1, j, A[R-1][j]))
-        #     seen.add((R-1, j))
             
-        walls = {(i, 0, A[i][0]) for i in range(R)} | {(i, C-1, A[i][C-1]) for i in range(R)} | {(0, j, A[0][j]) for j in range(C)} | {(R-1, j, A[R-1][j]) for j in range(C)}
+        walls = {(A[i][0], i, 0) for i in range(R)} | {(A[i][C-1], i, C-1) for i in range(R)} | {(A[0][j], 0, j) for j in range(C)} | {(A[R-1][j], R-1, j) for j in range(C)}
         seen = {(i, 0) for i in range(R)} | {(i, C-1) for i in range(R)} | {(0, j) for j in range(C)} | {(R-1, j) for j in range(C)}
-        pq = SortedList(walls, key=lambda x: x[2])
+        #pq = SortedList(walls, key=lambda x: x[2])
+        pq = list(walls);heapify(pq)
         level = 0
         ans = 0
         while pq:
-            i, j, h = pq.pop(0)
+            h, i, j = heappop(pq)
             level = max(h, level)
             for di, dj in DIRS:
                 ni, nj = di + i, dj + j
                 if 0 <= ni < R and 0 <= nj < C and (ni, nj) not in seen:
                     if level > A[ni][nj]:
                         ans += level - A[ni][nj]
-                    pq.add((ni, nj, A[ni][nj]))
+                    #pq.add((ni, nj, A[ni][nj]))
+                    heappush(pq, (A[ni][nj], ni, nj))
                     seen.add((ni, nj))
                     
         return ans
