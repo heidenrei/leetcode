@@ -6,19 +6,21 @@ class Solution:
         R, C = len(A), len(A[0])
         DIRS = [[1,0], [0,1], [0,-1],[-1,0]]
         
-        walls = set()
-        seen = set()
-        for i in range(R):
-            walls.add((i, 0, A[i][0]))
-            seen.add((i, 0))
-            walls.add((i, C-1, A[i][-1]))
-            seen.add((i, C-1))
-        for j in range(C):
-            walls.add((0, j, A[0][j]))
-            seen.add((0, j))
-            walls.add((R-1, j, A[R-1][j]))
-            seen.add((R-1, j))
+        # walls = set()
+        # seen = set()
+        # for i in range(R):
+        #     walls.add((i, 0, A[i][0]))
+        #     seen.add((i, 0))
+        #     walls.add((i, C-1, A[i][-1]))
+        #     seen.add((i, C-1))
+        # for j in range(C):
+        #     walls.add((0, j, A[0][j]))
+        #     seen.add((0, j))
+        #     walls.add((R-1, j, A[R-1][j]))
+        #     seen.add((R-1, j))
             
+        walls = {(i, 0, A[i][0]) for i in range(R)} | {(i, C-1, A[i][C-1]) for i in range(R)} | {(0, j, A[0][j]) for j in range(C)} | {(R-1, j, A[R-1][j]) for j in range(C)}
+        seen = {(i, 0) for i in range(R)} | {(i, C-1) for i in range(R)} | {(0, j) for j in range(C)} | {(R-1, j) for j in range(C)}
         pq = SortedList(walls, key=lambda x: x[2])
         level = 0
         ans = 0
