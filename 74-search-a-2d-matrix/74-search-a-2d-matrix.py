@@ -18,5 +18,4 @@ class Solution:
             else:
                 r = m - 1
         j = l
-        print(i, j)
         return A[i][j] == k
