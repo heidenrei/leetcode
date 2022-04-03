@@ -2,7 +2,7 @@ class Solution:
     def stoneGameVI(self, astones: List[int], bstones: List[int]) -> int:
         N = len(astones)
         stones = [[astones[i]+bstones[i], i] for i in range(N)]
-        stones.sort(key=lambda x: -abs(x[0]))
+        stones.sort(key=lambda x: -x[0])
         #print(stones)
         a = 0
         b = 0
