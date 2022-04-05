@@ -3,7 +3,7 @@ class Solution:
         N = len(stones)
         s = sum(stones)
         best = s
-        for i in range(N-2, 0, -1):
-            s -= stones[i+1]
+        for i in range(N-1, 1, -1):
+            s -= stones[i]
             best = max(best, s-best)
         return best
