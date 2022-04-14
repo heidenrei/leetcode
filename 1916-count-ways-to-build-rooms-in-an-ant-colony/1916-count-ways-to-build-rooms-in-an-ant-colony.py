@@ -6,16 +6,9 @@ class Solution:
         def f(x):
             if x <= 1:
                 return 1
-            #for xi in range(2, x+1):
             ans = f(x-1) * x
-            ans %= MOD
-            if ans == 0:
-                print('000', x)
-            return ans
+            return ans % MOD
 
-        #f = lambda x: factorial(x)
-        # print(pow(4, MOD-2, MOD))
-        # return 0
         def mi(x, y):
             #y **= (MOD-2)
             y = pow(y, MOD-2, MOD)
