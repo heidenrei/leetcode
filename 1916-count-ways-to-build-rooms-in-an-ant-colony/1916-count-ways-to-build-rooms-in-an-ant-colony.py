@@ -10,16 +10,13 @@ class Solution:
             return ans % MOD
 
         def mi(x, y):
-            #y **= (MOD-2)
             y = pow(y, MOD-2, MOD)
-            #y %= MOD
             ans = x * y
             ans %= MOD
             return ans
         
         d = defaultdict(list)
         N = len(rooms)
-        #print(N)
         for i in range(N):
             d[rooms[i]].append(i)
         
@@ -40,8 +37,7 @@ class Solution:
             for c in cnts:
                 p *= f(c)
                 scnts += c
-            
-            #ways *= f(scnts) // p
+
             ways *= mi(f(scnts), p)
             ways %= MOD
             return ways, sum(cnts) + 1
