@@ -32,30 +32,3 @@ class Solution:
                         remd -= 1
                         if not remd:
                             return 'Radiant'
-
-        
-        for i, x in enumerate(senate):
-            if i in removed:
-                continue
-            if x == 'D':
-                if bansd:
-                    bansd -= 1
-                else:
-                    bansr += 1
-                    remr -= 1
-                    if not remr:
-                        return 'Dire'
-            else:
-                if bansr:
-                    bansr -= 1
-                else:
-                    bansd += 1
-                    remd -= 1
-                    if not remd:
-                        print('1111')
-                        return 'Radiant'
-
-        if not remr:
-            return 'Dire'
-        else:
-            return 'Radiant'
