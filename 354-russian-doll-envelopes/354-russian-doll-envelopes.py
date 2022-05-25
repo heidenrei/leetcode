@@ -1,11 +1,14 @@
+from sortedcontainers import SortedList
+
 class Solution:
     def maxEnvelopes(self, nums: List[List[int]]) -> int:
         nums.sort(key=lambda x: (x[0], -x[1]))
-        dp = []
+        sl = SortedList()
         for x,y in nums:
-            idx = bisect_left(dp, y)
-            if idx == len(dp):
-                dp.append(y)
+            idx = sl.bisect_left(y)
+            if idx == len(sl):
+                sl.add(y)
             else:
-                dp[idx] = y
-        return len(dp)
+                sl.pop(idx)
+                sl.add(y)
+        return len(sl)
