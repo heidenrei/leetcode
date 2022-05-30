@@ -14,14 +14,12 @@ class Solution:
                 return go(i-1, j-1)
             
             elif p[j] == '*':
-                L = p[j-1]
-                if i >= 0 and ( s[i] == L or L == '.'):
+                if i >= 0 and (p[j-1] == s[i] or p[j-1] == '.'):
                     return go(i, j-1) or go(i-1, j) or go(i, j-2)
                 
                 else:
                     return go(i, j-2)
             
-            else:
-                return False
+            return False
         
         return go(Ns-1, Np-1)
