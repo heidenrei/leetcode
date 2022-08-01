@@ -33,18 +33,19 @@ class Solution:
             nxt, (di, dj) = d[(prev, A[i][j])]
             return go(i + di, j + dj, nxt)
         
-        if A[0][0] == 1:
-            return go(0, 0, 'RIGHT')
-        if A[0][0] == 2:
-            return go(0, 0, 'DOWN')
-        if A[0][0] == 3:
-            return go(0, 0, 'RIGHT')
-        if A[0][0] == 4:
-            if go(0, 0, 'LEFT'):
-                return True
-            seen = set()
-            return go(0, 0, 'UP')
-        if A[0][0] == 5:
-            return go(0, 0, 'RIGHT')
-        if A[0][0] == 6:
-            return go(0, 0, 'DOWN')
+        match A[0][0]:
+            case 1:
+                return go(0, 0, 'RIGHT')
+            case 2:
+                return go(0, 0, 'DOWN')
+            case 3:
+                return go(0, 0, 'RIGHT')
+            case 4:
+                if go(0, 0, 'LEFT'):
+                    return True
+                seen = set()
+                return go(0, 0, 'UP')
+            case 5:
+                return go(0, 0, 'RIGHT')
+            case 6:
+                return go(0, 0, 'DOWN')
