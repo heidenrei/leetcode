@@ -10,12 +10,12 @@ class Solution:
                 if starti is not None:
                     tmp = sorted(neededTime[starti:i])
                     ans += sum(tmp[:-1])
-                    print(curr, tmp)
+                    #print(curr, tmp)
                     curr = x
                     starti = i
         if curr is not None:
             tmp = sorted(neededTime[starti:i+1])
             ans += sum(tmp[:-1])
-            print(curr, tmp)
+            #print(curr, tmp)
         return ans
                     
