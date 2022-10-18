@@ -13,7 +13,7 @@ class Solution:
         for x in buses:
             if x not in used:
                 free.add(x)
-        print(free)
+        #print(free)
         for x in free:
             events.append([x, 0])
         
