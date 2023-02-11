@@ -1,6 +1,10 @@
 class Solution:
     def fib(self, n: int) -> int:
-        dp = [0, 1, 1]
-        for _ in range(3, n+1):
-            dp.append(dp[-1] + dp[-2])
-        return dp[n]
+        if not n:
+            return 0
+        @cache
+        def go(x):
+            if x < 3:
+                return 1
+            return go(x-1) + go(x-2)
+        return go(n)
