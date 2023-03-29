@@ -6,13 +6,8 @@ class Solution:
             return max(0, nums[0])
         def get_score(i):
             a = nums[-i:]
-            #a.reverse()
             b = indices[:i]
             ans = 0
-            # print(a)
-            # print(b)
-            # print(i)
-            # print()
             for j in range(i):
                 ans += a[j]*b[j]
             return ans
