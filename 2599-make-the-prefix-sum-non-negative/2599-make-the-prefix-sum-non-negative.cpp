@@ -1,15 +1,18 @@
-
-
-class Solution:
-    def makePrefSumNonNegative(self, nums: List[int]) -> int:
-        h = []
-        s = 0
-        ans = 0
-        for x in nums:
-            s += x
-            heappush(h, x)
-            while s < 0:
-                s -= heappop(h)
-                ans += 1
-
-        return ans
+class Solution {
+public:
+    int makePrefSumNonNegative(vector<int>& nums) {
+        int res = 0;
+        long long sum = 0;
+        multiset<int> nags;
+        for (auto x:nums) {
+            sum += x;
+            
+            if (x<0) nags.insert(x);
+            while (sum<0) {
+                sum -= nags.extract(nags.begin()).value();
+                res++;
+            }
+        }
+    return res;
+    }
+};
