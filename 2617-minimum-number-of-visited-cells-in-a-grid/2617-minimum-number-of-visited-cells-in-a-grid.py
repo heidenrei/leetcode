@@ -11,7 +11,6 @@ class Solution:
         row_cost[0].add([1, A[0][0]])
         col_cost[0].add([1, A[0][0]])
         di, dj = 1, -1
-        
         for j in range(1, C):
             i = 0
             while i < R and j >= 0:
