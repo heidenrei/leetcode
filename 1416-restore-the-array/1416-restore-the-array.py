@@ -3,22 +3,21 @@ class Solution:
         s = [int(x) for x in s]
         N, M = len(s), len(str(k))
         MOD = 10**9+7
-        # need 2 cases... equal to k and less than k..
-        # equal...
-        # less than k just count digits
-        @cache
-        def go(i):
-            if i == N:
-                return 1
-            ans = 0
+    
+        dp = [0 for x in range(N+1)]
+        dp[0] = 1
+        for i in range(N):
+            if not dp[i]:
+                continue
             curr = 0
-            for j in range(i+1, min(N+1, i+M+1)):
-                curr =  curr*10 + s[j-1]
-                if int(curr) > k:
+            j = i+1
+            while j <= N:
+                curr = curr*10 + s[j-1]
+                if curr > k:
                     break
                 if j == N or s[j]:
-                    #print(i, j)
-                    ans += go(j)
-                    ans %= MOD
-            return ans
-        return go(0)
+                    dp[j] += dp[i]
+                    dp[j] %= MOD
+                j += 1
+        #print(dp)
+        return dp[-1]
