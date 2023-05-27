@@ -11,14 +11,14 @@
 <p>Return <code>"Alice"</code><em> if Alice will win, </em><code>"Bob"</code><em> if Bob will win, or </em><code>"Tie"</code><em> if they will end the game with the same score</em>.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre><strong>Input:</strong> values = [1,2,3,7]
 <strong>Output:</strong> "Bob"
 <strong>Explanation:</strong> Alice will always lose. Her best move will be to take three piles and the score become 6. Now the score of Bob is 7 and Bob wins.
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> values = [1,2,3,-9]
 <strong>Output:</strong> "Alice"
@@ -28,7 +28,7 @@ If Alice chooses two piles her score will be 3 and the next move Bob's score bec
 Remember that both play optimally so here Alice will choose the scenario that makes her win.
 </pre>
 
-<p><strong>Example 3:</strong></p>
+<p><strong class="example">Example 3:</strong></p>
 
 <pre><strong>Input:</strong> values = [1,2,3,6]
 <strong>Output:</strong> "Tie"
