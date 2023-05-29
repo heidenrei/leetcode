@@ -1,11 +1,12 @@
 class Solution:
     def minOperations(self, nums: List[int], x: int, y: int) -> int:
         nums.sort(reverse=True)
+        d = x - y
         def is_good(total):
             rem = total
             for num in nums:
                 num -= (total-rem)*y + rem*y
-                needed = ceil(num/(x-y))
+                needed = ceil(num/d)
                 if needed > rem:
                     return False
                 rem -= needed
