@@ -4,17 +4,17 @@ class Solution:
         def is_good(total):
             rem = total
             for num in nums:
-                if total * y >= num:
-                    return True
-                elif rem*x < num - (total-rem)*y:
+                # if total * y >= num:
+                #     return True
+                # elif rem*x < num - (total-rem)*y:
+                #     return False
+                # else:
+                num -= (total-rem)*y
+                needed = ceil((num-rem*y)/(x-y))
+                if needed > rem:
                     return False
                 else:
-                    num -= (total-rem)*y
-                    needed = ceil((num-rem*y)/(x-y))
-                    if needed > rem:
-                        return False
-                    else:
-                        rem -= needed
+                    rem -= needed
             return True
 
         l, r = 0, 10**9
