@@ -1,5 +1,4 @@
 class SnapshotArray:
-
     def __init__(self, length: int):
         self.d = defaultdict(list)
         self.q = defaultdict(int)
@@ -17,16 +16,9 @@ class SnapshotArray:
         self.t += 1
         return self.t - 1
 
-    def get(self, index: int, snap_id: int) -> int:
-        #print(index, snap_id, self.d[index])
-        
+    def get(self, index: int, snap_id: int) -> int:        
         l, r = 0, len(self.d[index])-1
-        cnt = 0
         while l < r:
-            # print(cnt, l, r)
-            # cnt += 1
-            # if cnt > 12:
-            #     break
             m = l + (r-l+1)//2
             if self.d[index][m][0] <= snap_id:
                 l = m
@@ -34,10 +26,3 @@ class SnapshotArray:
                 r = m - 1
 
         return self.d[index][l][1]
-
-
-# Your SnapshotArray object will be instantiated and called as such:
-# obj = SnapshotArray(length)
-# obj.set(index,val)
-# param_2 = obj.snap()
-# param_3 = obj.get(index,snap_id)
